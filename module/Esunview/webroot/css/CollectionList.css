@@ -1,0 +1,10 @@
+ul {
+	list-style: none;
+	padding: 1.5rem 3rem;
+}
+li {
+	margin-bottom: 0.75rem;
+}
+.add-collection {
+	text-transform: lowercase;
+}
