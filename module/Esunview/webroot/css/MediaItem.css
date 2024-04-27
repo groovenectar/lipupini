@@ -1,0 +1,27 @@
+.purchase button,
+.purchased {
+	margin-bottom: 2rem;
+}
+.purchased > div {
+	border: 1px solid green;
+	padding: 1rem 2rem;
+	border-radius: 1rem;
+	background-color: darkgreen;
+	display: inline-block;
+}
+.purchased span {
+	font-style: italic;
+}
+.purchased a {
+	text-decoration: underline;
+}
+#media-item main {
+	animation: fadeIn .25s;
+}
+@keyframes fadeIn {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+footer {
+	margin-top: 3rem;
+}

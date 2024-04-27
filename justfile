@@ -13,7 +13,7 @@ inbox account:
 	ls -l --color=auto --format=single-column collection/{{account}}/.lipupini/inbox
 
 # Start PHP's built-in webserver
-serve frontend='Lukinview' port='4000':
+serve frontend='Esunview' port='4000':
 	cd module/{{frontend}}/webroot && PHP_CLI_SERVER_WORKERS=2 php -S localhost:{{port}} index.php
 
 # Build a Lipupini Docker image from `system/docker`

@@ -6,6 +6,7 @@ ini_set('memory_limit', '512M');
 
 use Module\Lipupini\Collection;
 use Module\Lipupini\Collection\MediaProcessor;
+use Module\Esunview\Collection\MediaProcessor\Image as MediaProcessorImage;
 use Module\Lipupini\State;
 
 // See `readline` note in root README.md as this script might benefit from prompts
@@ -59,7 +60,7 @@ foreach ($collectionDataPrepared as $fileTypeFolder => $filePaths) {
 		case 'image' :
 			foreach ($filePaths as $filePath) {
 				foreach ($systemState->mediaSize as $imageSize => $dimensions) {
-					MediaProcessor\Image::processAndCache($systemState, $collectionName, $fileTypeFolder, $imageSize, $filePath, echoStatus: true);
+					MediaProcessorImage::processAndCache($systemState, $collectionName, $fileTypeFolder, $imageSize, $filePath, echoStatus: true);
 				}
 			}
 			break;
