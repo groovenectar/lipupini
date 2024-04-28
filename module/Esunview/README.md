@@ -7,7 +7,10 @@ An example is here: https://c.dup.bz/@gallery
 
 You can use it unrestricted with no time limit, and a donation link is available here: https://buy.stripe.com/5kA7tY4KJ0hvcpO4h4
 
-Hopefully you can make some kind of income with it!
+Hopefully you can make some kind of income with it! What it ends up creating on the Stripe side is a nice organization of digital products and orders:
+
+![image](https://github.com/groovenectar/lipupini/assets/595446/df460045-f824-43b8-a009-e6e951c54cf1)
+
 
 ## Brief Rundown
 
