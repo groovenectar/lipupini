@@ -27,7 +27,7 @@ require(__DIR__ . '/../Core/Open.php') ?>
 	<?php else : ?>
 	<form class="purchase" action="/purchase/<?php echo $collectionUtility::urlEncodeUrl($this->collectionName . '/' . $this->collectionFilePath) ?>" method="get">
 		<div>
-			<button type="submit">Get High Quality Version</button>
+			<button type="submit">Get High Quality Version @ $1</button>
 		</div>
 	</form>
 	<?php endif ?>
@@ -61,13 +61,13 @@ case 'image' : ?>
 	<img src="<?php echo $collectionUtility::urlEncodeUrl($collectionUtility->assetUrl($this->collectionName, 'image/large', $this->collectionFilePath)) ?>" title="<?php echo htmlentities($this->fileData['caption']) ?>">
 </a>
 <?php else : ?>
-<div class="image-container">
-	<img src="<?php echo $collectionUtility::urlEncodeUrl($collectionUtility->assetUrl($this->collectionName, 'image/medium', $this->collectionFilePath)) ?>" title="<?php echo htmlentities($this->fileData['caption']) ?>">
-</div>
+    <a href="<?php echo $collectionUtility::urlEncodeUrl($collectionUtility->assetUrl($this->collectionName, 'image/medium', $this->collectionFilePath)) ?>" target="_blank" class="image-container">
+        <img src="<?php echo $collectionUtility::urlEncodeUrl($collectionUtility->assetUrl($this->collectionName, 'image/medium', $this->collectionFilePath)) ?>" title="<?php echo htmlentities($this->fileData['caption']) ?>">
+    </a>
 <?php endif ?>
 <?php else : ?>
-<a href="<?php echo $collectionUtility::urlEncodeUrl($collectionUtility->assetUrl($this->collectionName, 'image/medium', $this->collectionFilePath)) ?>" target="_blank" class="image-container">
-	<img src="<?php echo $collectionUtility::urlEncodeUrl($collectionUtility->assetUrl($this->collectionName, 'image/large', $this->collectionFilePath)) ?>" title="<?php echo htmlentities($this->fileData['caption']) ?>">
+<a href="<?php echo $collectionUtility::urlEncodeUrl($collectionUtility->assetUrl($this->collectionName, 'image/large', $this->collectionFilePath)) ?>" target="_blank" class="image-container">
+	<img src="<?php echo $collectionUtility::urlEncodeUrl($collectionUtility->assetUrl($this->collectionName, 'image/medium', $this->collectionFilePath)) ?>" title="<?php echo htmlentities($this->fileData['caption']) ?>">
 </a>
 <?php endif ?>
 
@@ -90,11 +90,6 @@ endswitch;
 ?>
 
 </main>
-<footer>
-	<div class="about">
-		<a href="https://github.com/lipupini/lipupini" target="_blank" rel="noopener noreferrer" class="button" title="<?php echo A::z('More information about this software') ?>">?</a>
-	</div>
-</footer>
 </div>
 
 <?php require(__DIR__ . '/../Core/Close.php') ?>

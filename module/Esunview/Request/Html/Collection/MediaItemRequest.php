@@ -12,7 +12,6 @@ class MediaItemRequest extends Request\Html {
 	private array $fileData = [];
 	private string|null $parentPath = null;
 	public string|null $collectionFilePath = null;
-
 	public bool|null $purchased = null; // `null` means Not purchasable
 
 	use Collection\Trait\CollectionRequest;

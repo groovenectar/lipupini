@@ -37,6 +37,8 @@ class Gateway {
 
 	// Generate payment link and redirect
 	public function redirectToPayment(string $collectionName, string $collectionFilePath) {
+		$currency = 'usd';
+		$price = 100;
 		$collectionUtility = new Utility($this->systemState);
 		$productName = $collectionFilePath . ' @' . $collectionName;
 		$itemUrl = $this->systemState->baseUri . '@' . $collectionName . '/' . $collectionFilePath . '.html';
@@ -49,14 +51,14 @@ class Gateway {
 				],
 				'url' => $collectionUtility::urlEncodeUrl($itemUrl),
 			],
-			['idempotency_key' => 'ik-product-' . sha1($productName . $this->systemState->stripeKey)]
+			['idempotency_key' => 'ik-product-' . sha1($productName . $itemUrl . $this->systemState->stripeKey)]
 		);
 
 		$price = $this->stripe->prices->create([
-				'currency' => 'usd',
+				'currency' => $currency,
 				'custom_unit_amount' => [
-					'preset' => 500,
-					'minimum' => 500,
+					'preset' => $price,
+					'minimum' => $price,
 					'enabled' => true,
 				],
 				'product' => $product->id,
@@ -64,7 +66,7 @@ class Gateway {
 					'pathHash' => sha1($collectionName . '/'. $collectionFilePath),
 				],
 			],
-			['idempotency_key' => 'ik-price-' . sha1($productName . $this->systemState->stripeKey)]
+			['idempotency_key' => 'ik-price-' . sha1($price . $currency . $product->id . $this->systemState->stripeKey)]
 		);
 
 		$paymentLink = $this->stripe->paymentLinks->create([
@@ -80,7 +82,7 @@ class Gateway {
 				],
 				'payment_intent_data' => ['description' => $productName],
 			],
-			['idempotency_key' => 'ik-payment-link-' . sha1($productName . $this->systemState->stripeKey)]
+			['idempotency_key' => 'ik-payment-link-' . sha1($productName . $price->id . $this->systemState->stripeKey)]
 		);
 
 		header('Location: ' . $paymentLink->url);
