@@ -75,8 +75,10 @@ class Image extends \Module\Lipupini\Collection\MediaProcessor\Image {
 	}
 
 	public static function processAndCache(State $systemState, string $collectionName, string $fileTypeFolder, string $sizePreset, string $filePath, bool $echoStatus = false): false|string {
-		$cache = new Cache($systemState, $collectionName, private: $sizePreset === 'large');
 		$collectionPath = $systemState->dirCollection . '/' . $collectionName;
+		$watermarkImageFile = $collectionPath . '/.lipupini/watermark.png';
+		$hasWatermark = file_exists($watermarkImageFile);
+		$cache = new Cache($systemState, $collectionName, private: $hasWatermark && $sizePreset === 'large');
 
 		$cache::staticCacheSymlink($systemState, $collectionName);
 
@@ -88,12 +90,16 @@ class Image extends \Module\Lipupini\Collection\MediaProcessor\Image {
 		}
 
 		if (file_exists($fileCachePath)) {
+			$fileMTimeCachePath = filemtime($fileCachePath);
 			if (
 				// If the cache path is a symlink, then we don't care about it because any changes to the linked file will work automatically
 				!is_link($fileCachePath) &&
 				// If the original file has been modified since the cache file was created
-				filemtime($collectionPath . '/' . $filePath) > filemtime($fileCachePath))
-			{
+				(
+					(filemtime($collectionPath . '/' . $filePath) > $fileMTimeCachePath) ||
+					($hasWatermark && $sizePreset !== 'large' && filemtime($watermarkImageFile) > $fileMTimeCachePath)
+				)
+			) {
 				if ($echoStatus) {
 					echo 'Image preset ' . $sizePreset . ' for `' . $filePath . '` is outdated, deleting cache file...' . "\n";
 				}
@@ -162,8 +168,7 @@ class Image extends \Module\Lipupini\Collection\MediaProcessor\Image {
 		;
 
 		// Add watermark if present
-		$watermarkImageFile = $collectionPath . '/.lipupini/watermark.png';
-		if ($sizePreset !== 'large' && file_exists($watermarkImageFile)) {
+		if ($hasWatermark && $sizePreset !== 'large') {
 			$size = $imagine->getSize();
 			$wSize = floor(min($size->getWidth(), $size->getHeight()) * .3);
 			$watermark = static::imagine()->open($watermarkImageFile)->thumbnail(

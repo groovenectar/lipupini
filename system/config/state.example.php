@@ -12,9 +12,11 @@ $isHttps = !empty($_SERVER['HTTPS']) || (!empty($_SERVER['HTTP_X_FORWARDED_PROTO
 $baseUri = 'http' . ($isHttps ? 's' : '') . '://' . $httpHost . '/';
 
 return new Module\Lipupini\State(
+	//stripeKey: 'sk_test_EXAMPLE',
+	stripeKey: 'sk_live_EXAMPLE',
 	baseUri: $baseUri, // Include trailing slash
 	staticMediaBaseUri: $baseUri . 'c/', // You can put a CDN URL here. Include trailing slash.
-	frontendModule: 'Lukinview',
+	frontendModule: 'Esunview',
 	viewLanguage: 'en',
 	itemsPerPage: 36,
 	mediaSize: ['large' => [7680, 4320], 'medium' => [2000, 1500], 'thumbnail' => [500, 500]], // Default [width, height] for each preset. You can add more, and renaming the defaults is not recommended
@@ -44,20 +46,21 @@ return new Module\Lipupini\State(
 	request: [
 		// Once instantiated by Module\Lipupini\Request\Incoming\Queue `render()`,
 		// each `request` key here will instead hold the module instance itself
-		Module\Lukinview\Request\Html\HomepageRequest::class => null,
+		Module\Esunview\Request\Html\HomepageRequest::class => null,
 		Module\Lipupini\Api\Request::class => null,
 		Module\Lipupini\Rss\Request::class => null,
 		Module\Lipupini\WebFinger\Request::class => null,
 		Module\Lipupini\ActivityPub\Request::class => null,
 		Module\Lipupini\ActivityPub\NodeInfoRequest::class => null,
-		Module\Lukinview\Request\Html\Collection\FolderRequest::class => null,
-		Module\Lukinview\Request\Html\Collection\MediaItemRequest::class => null,
-		Module\Lukinview\Request\Html\Collection\ListRequest::class => null,
+		Module\Esunview\Request\Html\Collection\FolderRequest::class => null,
+		Module\Esunview\Request\Html\Collection\MediaItemRequest::class => null,
+		Module\Esunview\Request\Html\Collection\ListRequest::class => null,
+		Module\Esunview\Request\Html\Collection\PurchaseRequest::class => null,
 		Module\Lipupini\Collection\MediaProcessor\Request\AudioRequest::class => null,
 		Module\Lipupini\Collection\MediaProcessor\Request\AudioThumbnailRequest::class => null,
 		Module\Lipupini\Collection\MediaProcessor\Request\AudioWaveformRequest::class => null,
 		Module\Lipupini\Collection\MediaProcessor\Request\AvatarRequest::class => null,
-		Module\Lipupini\Collection\MediaProcessor\Request\ImageRequest::class => null,
+		Module\Esunview\Collection\MediaProcessor\Request\ImageRequest::class => null,
 		Module\Lipupini\Collection\MediaProcessor\Request\TextRequest::class => null,
 		Module\Lipupini\Collection\MediaProcessor\Request\VideoRequest::class => null,
 		Module\Lipupini\Collection\MediaProcessor\Request\VideoThumbnailRequest::class => null,

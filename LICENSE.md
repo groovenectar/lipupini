@@ -1,4 +1,10 @@
-License: Public Domain
+Esunview is Donationware. You can use it unrestricted with no time limit, and a donation link is available here: https://buy.stripe.com/5kA7tY4KJ0hvcpO4h4
+
+See [module/Esunview/README.md](module/Esunview/README.md)
+
+---
+
+Lipupini, by the same author, is Public Domain. See https://github.com/lipupini/lipupini/blob/demo/LICENSE.md
 
 You are not required to report back to upstream if you add anything to improve it, but would be great if you did.
 
