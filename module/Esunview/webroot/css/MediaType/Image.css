@@ -1,30 +1,19 @@
 .image-container {
-	position: relative;
-}
-.image-container:before {
-	content: '';
+	display: flex;
 	background-image: url('/img/loading.gif') !important;
 	background-repeat: no-repeat;
 	background-position: center center;
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	z-index: -1;
 }
-#folder .image-container,
 #folder .image-container img {
 	aspect-ratio: 1;
-}
-#folder .image-container {
-	overflow: hidden;
-}
-#folder .image-container img {
 	width: 100%;
 }
 #media-item {
 	text-align: center;
+}
+#media-item .image-container {
+	/* height of loading indicator */
+	min-height: 32px;
 }
 #media-item .image-container img {
 	max-height: 85vh;
