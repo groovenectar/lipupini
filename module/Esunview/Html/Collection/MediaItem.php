@@ -17,6 +17,7 @@ require(__DIR__ . '/../Core/Open.php') ?>
 <main>
 	<?php if ($this->fileData['mediaType'] === 'image' && !is_null($this->purchased)) : ?>
 	<?php if ($this->purchased) : ?>
+
 	<div class="purchased">
 		<div>
 			<span>Thanks for your purchase!</span><br><br>
@@ -25,6 +26,7 @@ require(__DIR__ . '/../Core/Open.php') ?>
 		</div>
 	</div>
 	<?php else : ?>
+
 	<form class="purchase" action="/purchase/<?php echo $collectionUtility::urlEncodeUrl($this->collectionName . '/' . $this->collectionFilePath) ?>" method="get">
 		<div>
 			<button type="submit">Get High Quality Version @ $1</button>
