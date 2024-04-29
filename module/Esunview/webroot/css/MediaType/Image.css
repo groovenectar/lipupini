@@ -1,5 +1,6 @@
 .image-container {
 	display: flex;
+	justify-content: center;
 	background-image: url('/img/loading.gif') !important;
 	background-repeat: no-repeat;
 	background-position: center center;
