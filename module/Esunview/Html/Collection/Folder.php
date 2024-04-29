@@ -48,8 +48,9 @@ case 'image' : ?>
 	class="image-container"
 	href="/@<?php echo $collectionUtility::urlEncodeUrl($this->collectionName . '/' . $filename) ?>.html"
 	title="<?php echo htmlentities($item['caption']) ?>"
-	style="background-image:url('<?php echo $collectionUtility::urlEncodeUrl($collectionUtility->assetUrl($this->collectionName, 'image/thumbnail', $filename)) ?>')"
-></a>
+>
+	<img src="<?php echo $collectionUtility::urlEncodeUrl($collectionUtility->assetUrl($this->collectionName, 'image/thumbnail', $filename)) ?>" loading="lazy">
+</a>
 <?php break;
 case 'text' : ?>
 
