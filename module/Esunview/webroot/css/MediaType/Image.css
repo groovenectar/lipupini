@@ -1,6 +1,5 @@
 .image-container {
-	display: flex;
-	justify-content: center;
+	display: inline-flex;
 	background-image: url('/img/loading.gif') !important;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -13,7 +12,8 @@
 	text-align: center;
 }
 #media-item .image-container {
-	/* height of loading indicator */
+	/* dimensions of loading indicator */
+	min-width: 32px;
 	min-height: 32px;
 }
 #media-item .image-container img {
