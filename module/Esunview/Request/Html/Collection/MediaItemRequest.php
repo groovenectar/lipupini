@@ -14,7 +14,10 @@ class MediaItemRequest extends Request\Html {
 	private string|null $parentPath = null;
 	public string|null $collectionFilePath = null;
 	public bool|null $purchased = null; // `null` means Not purchasable
-	public string $purchaseButtonLabel = '';
+	public array $purchaseButtonLabel = [
+		'h1' => '',
+		'h2' => '',
+	];
 
 	use Collection\Trait\CollectionRequest;
 
@@ -120,17 +123,21 @@ class MediaItemRequest extends Request\Html {
 
 		$this->preloadReady();
 
-		if (file_exists($this->system->dirCollection . '/' . $this->collectionName . '/.lipupini/watermark.png')) {
+		// This should be rethought if needed
+		if (
+			file_exists($this->system->dirCollection . '/' . $this->collectionName . '/.lipupini/watermark.png') ||
+			Gateway::gatedFolder($this->system->dirCollection . '/' . rtrim($this->collectionName . '/' . pathinfo($this->collectionFilePath, PATHINFO_DIRNAME), '/'))
+		) {
 			$this->purchased = (new Gateway($this->system))->itemPurchased(
 				$this->collectionName,
 				$this->collectionFilePath
 			);
 		}
 
-		$this->purchaseButtonLabel = 'Buy a Download';
+		$this->purchaseButtonLabel['h1'] = 'Buy a Download';
 		if ($this->fileData['mediaType'] === 'image') {
 			$size = Image::imagine()->open($this->system->dirCollection . '/' . $this->collectionName . '/' . $this->collectionFilePath)->getSize();
-			$this->purchaseButtonLabel .= ' (' . $size->getWidth() . 'x' . $size->getHeight() . ')';
+			$this->purchaseButtonLabel['h2'] .= $size->getWidth() . 'x' . $size->getHeight();
 		}
 
 		if ($this->purchased) {
