@@ -15,6 +15,7 @@ require(__DIR__ . '/../Core/Open.php') ?>
 	</nav>
 </header>
 <main>
+<?php if (!is_null($this->purchased)) : ?>
 <?php if ($this->purchased) : ?>
 
 <div class="purchased">
@@ -28,9 +29,13 @@ require(__DIR__ . '/../Core/Open.php') ?>
 
 <form class="purchase" action="/purchase/<?php echo $collectionUtility::urlEncodeUrl($this->collectionName . '/' . $this->collectionFilePath) ?>" method="get">
 	<div>
-		<button type="submit"><?php echo htmlentities($this->purchaseButtonLabel) ?></button>
+		<button type="submit">
+			<strong><?php echo htmlentities($this->purchaseButtonLabel['h1']) ?></strong><br>
+			<small><?php echo htmlentities($this->purchaseButtonLabel['h2']) ?></small>
+		</button>
 	</div>
 </form>
+<?php endif ?>
 <?php endif ?>
 <?php
 switch ($this->fileData['mediaType']) :
