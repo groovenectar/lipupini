@@ -3,6 +3,7 @@
 namespace Module\Esunview\Request\Html\Collection;
 
 use Module\Lipupini\Collection;
+use Module\Esunview\Payment\Gateway;
 use Module\Lipupini\Request;
 
 class FolderRequest extends Request\Html {
@@ -33,6 +34,10 @@ class FolderRequest extends Request\Html {
 		);
 
 		(new Collection\Utility($this->system))->validateCollectionFolder($this->collectionName, $this->collectionFolder);
+
+		$gateway = new Gateway($this->system);
+		$gateway->openGate($this->collectionName, $this->collectionFolder);
+		$gateway->gateCheck($this->collectionName, $this->collectionFolder);
 
 		$this->renderHtml();
 		$this->system->shutdown = true;
