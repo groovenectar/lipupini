@@ -2,6 +2,7 @@
 
 namespace Module\Esunview\Request\Html\Collection;
 
+use Module\Esunview\Collection\MediaProcessor\Image;
 use Module\Esunview\Payment\Gateway;
 use Module\Lipupini\Collection;
 use Module\Lipupini\Exception;
@@ -13,6 +14,7 @@ class MediaItemRequest extends Request\Html {
 	private string|null $parentPath = null;
 	public string|null $collectionFilePath = null;
 	public bool|null $purchased = null; // `null` means Not purchasable
+	public string $purchaseButtonLabel = '';
 
 	use Collection\Trait\CollectionRequest;
 
@@ -31,12 +33,15 @@ class MediaItemRequest extends Request\Html {
 					'#^/@' . preg_quote($this->collectionName) . '/?#', '',
 					$_SERVER['REQUEST_URI_DECODED'] // Automatically strips query string
 				)
-		);
+			)
+		;
 
 		// Make sure file in collection exists before proceeding
 		if (!file_exists($this->system->dirCollection . '/' . $this->collectionName . '/' . $this->collectionFilePath)) {
 			return;
 		}
+
+		(new Gateway($this->system))->gateCheck($this->collectionName, $this->collectionFilePath);
 
 		if (!$this->loadViewData()) {
 			return;
@@ -120,6 +125,12 @@ class MediaItemRequest extends Request\Html {
 				$this->collectionName,
 				$this->collectionFilePath
 			);
+		}
+
+		$this->purchaseButtonLabel = 'Buy a Download';
+		if ($this->fileData['mediaType'] === 'image') {
+			$size = Image::imagine()->open($this->system->dirCollection . '/' . $this->collectionName . '/' . $this->collectionFilePath)->getSize();
+			$this->purchaseButtonLabel .= ' (' . $size->getWidth() . 'x' . $size->getHeight() . ')';
 		}
 
 		if ($this->purchased) {

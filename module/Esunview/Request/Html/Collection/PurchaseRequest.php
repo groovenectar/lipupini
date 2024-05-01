@@ -27,6 +27,6 @@ class PurchaseRequest extends Request\Queued {
 			return;
 		}
 
-		(new Gateway($this->system))->redirectToPayment($this->collectionName, $this->collectionFilePath);
+		(new Gateway($this->system))->redirectToPaymentItem($this->collectionName, $this->collectionFilePath);
 	}
 }

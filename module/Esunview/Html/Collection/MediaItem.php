@@ -15,25 +15,23 @@ require(__DIR__ . '/../Core/Open.php') ?>
 	</nav>
 </header>
 <main>
-	<?php if ($this->fileData['mediaType'] === 'image' && !is_null($this->purchased)) : ?>
-	<?php if ($this->purchased) : ?>
+<?php if ($this->purchased) : ?>
 
-	<div class="purchased">
-		<div>
-			<span>Thanks for your purchase!</span><br><br>
-			<strong><a href="<?php echo $collectionUtility::urlEncodeUrl($collectionUtility->assetUrl($this->collectionName, 'image/large', $this->collectionFilePath)) ?>" target="_blank">High Quality Version Link</a></strong><br><br>
-			Be sure to save your copy now.
-		</div>
+<div class="purchased">
+	<div>
+		<span>Thank you!</span><br><br>
+		<strong><a href="<?php echo $collectionUtility::urlEncodeUrl($collectionUtility->assetUrl($this->collectionName, 'image/large', $this->collectionFilePath)) ?>" target="_blank">Download Link</a></strong><br><br>
+		Be sure to save your copy now.
 	</div>
-	<?php else : ?>
+</div>
+<?php else : ?>
 
-	<form class="purchase" action="/purchase/<?php echo $collectionUtility::urlEncodeUrl($this->collectionName . '/' . $this->collectionFilePath) ?>" method="get">
-		<div>
-			<button type="submit">Get High Quality Version @ $1</button>
-		</div>
-	</form>
-	<?php endif ?>
-	<?php endif ?>
+<form class="purchase" action="/purchase/<?php echo $collectionUtility::urlEncodeUrl($this->collectionName . '/' . $this->collectionFilePath) ?>" method="get">
+	<div>
+		<button type="submit"><?php echo htmlentities($this->purchaseButtonLabel) ?></button>
+	</div>
+</form>
+<?php endif ?>
 <?php
 switch ($this->fileData['mediaType']) :
 case 'audio' : ?>
