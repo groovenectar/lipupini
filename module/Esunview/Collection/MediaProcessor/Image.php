@@ -89,6 +89,10 @@ class Image extends \Module\Lipupini\Collection\MediaProcessor\Image {
 			return false;
 		}
 
+		if ($sizePreset === 'watermark' && !$hasWatermark) {
+			return false;
+		}
+
 		if (file_exists($fileCachePath)) {
 			$fileMTimeCachePath = filemtime($fileCachePath);
 			if (
@@ -168,7 +172,7 @@ class Image extends \Module\Lipupini\Collection\MediaProcessor\Image {
 		;
 
 		// Add watermark if present
-		if ($hasWatermark && $sizePreset === 'watermark') {
+		if ($sizePreset === 'watermark' && $hasWatermark) {
 			$size = $imagine->getSize();
 			$wSize = floor(min($size->getWidth(), $size->getHeight()) * .3);
 			$watermark = static::imagine()->open($watermarkImageFile)->thumbnail(
