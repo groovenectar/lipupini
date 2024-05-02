@@ -168,7 +168,7 @@ class Image extends \Module\Lipupini\Collection\MediaProcessor\Image {
 		;
 
 		// Add watermark if present
-		if ($hasWatermark && $sizePreset !== 'large') {
+		if ($hasWatermark && $sizePreset === 'watermark') {
 			$size = $imagine->getSize();
 			$wSize = floor(min($size->getWidth(), $size->getHeight()) * .3);
 			$watermark = static::imagine()->open($watermarkImageFile)->thumbnail(

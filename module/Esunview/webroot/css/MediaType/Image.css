@@ -1,3 +1,13 @@
+.watermark-link {
+	margin-top: -1rem;
+	margin-bottom: 2rem;
+	display: block;
+	font-size: 90%;
+	opacity: .7;
+}
+.watermark-link:hover {
+	opacity: 1;
+}
 .image-container {
 	display: inline-flex;
 	background-image: url('/img/loading.gif') !important;

@@ -66,9 +66,10 @@ case 'image' : ?>
 	<img src="<?php echo $collectionUtility::urlEncodeUrl($collectionUtility->assetUrl($this->collectionName, 'image/large', $this->collectionFilePath)) ?>" title="<?php echo htmlentities($this->fileData['caption']) ?>">
 </a>
 <?php else : ?>
-    <a href="<?php echo $collectionUtility::urlEncodeUrl($collectionUtility->assetUrl($this->collectionName, 'image/medium', $this->collectionFilePath)) ?>" target="_blank" class="image-container">
-        <img src="<?php echo $collectionUtility::urlEncodeUrl($collectionUtility->assetUrl($this->collectionName, 'image/medium', $this->collectionFilePath)) ?>" title="<?php echo htmlentities($this->fileData['caption']) ?>">
-    </a>
+<div><a href="<?php echo $collectionUtility::urlEncodeUrl($collectionUtility->assetUrl($this->collectionName, 'image/watermark', $this->collectionFilePath)) ?>" target="_blank" class="watermark-link">Watermarked Version</a></div>
+<a href="<?php echo $collectionUtility::urlEncodeUrl($collectionUtility->assetUrl($this->collectionName, 'image/medium', $this->collectionFilePath)) ?>" target="_blank" class="image-container">
+	<img src="<?php echo $collectionUtility::urlEncodeUrl($collectionUtility->assetUrl($this->collectionName, 'image/medium', $this->collectionFilePath)) ?>" title="<?php echo htmlentities($this->fileData['caption']) ?>">
+</a>
 <?php endif ?>
 <?php else : ?>
 <a href="<?php echo $collectionUtility::urlEncodeUrl($collectionUtility->assetUrl($this->collectionName, 'image/large', $this->collectionFilePath)) ?>" target="_blank" class="image-container">

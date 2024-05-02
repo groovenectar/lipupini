@@ -132,16 +132,14 @@ class MediaItemRequest extends Request\Html {
 				$this->collectionName,
 				$this->collectionFilePath
 			);
+			// I care to suppress clientside cache if the item *can* be purchased, not whether it has been purchased
+			$this->system->clientCache = false;
 		}
 
 		$this->purchaseButtonLabel['h1'] = 'Buy a Download';
 		if ($this->fileData['mediaType'] === 'image') {
 			$size = Image::imagine()->open($this->system->dirCollection . '/' . $this->collectionName . '/' . $this->collectionFilePath)->getSize();
 			$this->purchaseButtonLabel['h2'] .= $size->getWidth() . 'x' . $size->getHeight();
-		}
-
-		if ($this->purchased) {
-			$this->system->clientCache = false;
 		}
 
 		return true;

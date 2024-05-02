@@ -77,7 +77,7 @@ class Gateway {
 	// Generate payment link and redirect
 	public function redirectToPaymentItem(string $collectionName, string $collectionFilePath) {
 		$currency = 'usd';
-		$price = 500;
+		$price = 100;
 		$collectionUtility = new Utility($this->system);
 		$productName = $collectionFilePath . ' @' . $collectionName;
 		$description = 'Thank you!';
